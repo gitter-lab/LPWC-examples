@@ -32,25 +32,15 @@ dat3 <- data.frame(intensity = as.vector(a3), time = rep(c(0, 5, 15, 30, 45, 60,
 plot1 <- ggplot(dat, aes(x= time, y = intensity, group = genes)) + geom_line(aes(color = genes), size = 1.5) +  labs(x = "Time (min)") + labs(y = "Intensity") 
 plot1
 
-row1 <- c(0, 5, 15, 30, 45, 60, 75)
-knitr::kable(t(data.frame(Original = row1, Gene1 = row1, Gene2 = row1)), align = 'c')
-
-
-
 
 plot2 <- ggplot(dat2, aes(x= time, y = intensity, group = genes)) + geom_line(aes(color = genes), size = 1.5) +
   labs(x = "Time (min)") + labs(y = "Intensity") 
 plot2
 
-row2 <- c(5, 15, 30, 45, 60, 75, "-")
-
-
 
 plot3 <- ggplot(dat3, aes(x= time, y = intensity, group = genes)) + geom_line(aes(color = genes), size = 1.5) + 
   labs(x = "Time (min)") + labs(y = "Intensity") 
 plot3
-
-row3 <- c("-", 0, 5, 15, 30, 45, 60)
 
 
 LPWC::corr.bestlag(simdata[49:58, ], timepoints = timepoints, max.lag = 2, penalty = "high", iter = 10)
