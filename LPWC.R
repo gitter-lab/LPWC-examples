@@ -1,57 +1,40 @@
-
+# loading LPWC library
 library(LPWC)
 
-
+# loading the simulated data
 data(simdata)
-simdata[1:5, ]
+
+# viewing head of the simulated data
+head(simdata)
+
+# looking at the structure of the simulated data
 str(simdata)
 
-
+# adding timepoint respected to the simulated data
 timepoints <- c(0, 2, 4, 6, 8, 18, 24, 32, 48, 72)
 timepoints
 
+# loading ggplot2 library
 library(ggplot2)
 
+#setting seed
 set.seed(29876)
 
 
-a <- rbind(c(rep(0, 5), 8, 0), c(rep(0, 4), 4.3, 0, 0)) + rnorm(2, 0, 0.5)
+# store results for high penalty simulation
+high_results <- LPWC::corr.bestlag(simdata, timepoints = timepoints, max.lag = 2, penalty = "high", iter = 10)
 
-dat <- data.frame(intensity = as.vector(a), time = rep(c(0, 5, 15, 30, 45, 60, 75), each = 2), genes = factor(rep(c(1, 2), 7)))
+# compute distance for high penalty
+dist_high <- 1 - LPWC::corr.bestlag(simdata, timepoints = timepoints, max.lag = 2, penalty = "low", iter = 10)$corr
 
-a2 <- a
-a2[1, ] <- c(a2[1, 2:7], NA)
-dat2 <- data.frame(intensity = as.vector(a2), time = rep(c(0, 5, 15, 30, 45, 60, 75), each = 2), genes = factor(rep(c(1, 2), 7)))
+# plot hierarchical clustering
+plot(hclust(dist_high))
 
-a3 <- a
-a3[2, ] <- c(NA, a3[2, 1:6])
-a3[1, ] <- c(a3[1, 2:7], NA)
-dat3 <- data.frame(intensity = as.vector(a3), time = rep(c(0, 5, 15, 30, 45, 60, 75), each = 2), genes = factor(rep(c(1, 2), 7)))
+# compute distance for low penalty
+dist_low <- 1 - LPWC::corr.bestlag(simdata, timepoints = timepoints, max.lag = 2, penalty = "low", iter = 10)$corr
 
-
-plot1 <- ggplot(dat, aes(x= time, y = intensity, group = genes)) + geom_line(aes(color = genes), size = 1.5) +  labs(x = "Time (min)") + labs(y = "Intensity") 
-plot1
-
-
-plot2 <- ggplot(dat2, aes(x= time, y = intensity, group = genes)) + geom_line(aes(color = genes), size = 1.5) +
-  labs(x = "Time (min)") + labs(y = "Intensity") 
-plot2
-
-
-plot3 <- ggplot(dat3, aes(x= time, y = intensity, group = genes)) + geom_line(aes(color = genes), size = 1.5) + 
-  labs(x = "Time (min)") + labs(y = "Intensity") 
-plot3
-
-
-LPWC::corr.bestlag(simdata[49:58, ], timepoints = timepoints, max.lag = 2, penalty = "high", iter = 10)
-
-dist <- 1 - LPWC::corr.bestlag(simdata[11:20, ], timepoints = timepoints, max.lag = 2, penalty = "low", iter = 10)$corr
-plot(hclust(dist))
-
-
-
-dist <- 1 - LPWC::corr.bestlag(simdata[11:20, ], timepoints = timepoints, max.lag = 2, penalty = "low", iter = 10)$corr
-cutree(hclust(dist), k = 3)
+# divide the cluster to 3 groups
+cutree(hclust(dist_low), k = 3)
 
 
 
