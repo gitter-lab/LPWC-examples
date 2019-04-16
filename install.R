@@ -4,4 +4,6 @@ install.packages(c("testthat",
                    "ggplot2",
                    "knitr",
                    "LPWC",
-                   "devtools"))
+                   "devtools",
+                   "fpc",
+                   "reshape2"))
