@@ -9,5 +9,5 @@ If you see the error message `Failed to connect to event stream` when lanching B
 The connection will typically be re-established and launch Binder successfully.
 
 ## Scripts
-The `LPWC.R` file executes all the code available in LPWC vignette.
+The `LPWC.R` file executes all the code available in the LPWC vignette.
 The `example.R` file provides an example code for analyzing time-series data using LPWC, it also helps you select the right cluster number using silhouette and plot the clusters using ggplot2. 
