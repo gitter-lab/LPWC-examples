@@ -50,9 +50,11 @@ for(i in 3:20){
 plot(3:20, sil.width, type = "l")
 
 ## based on the plot, 7 was picked as the ideal cluster size 
+cluster.size <- 7
+
 ## the cluster are plotted and saved
-for(i in 1:7){
-  clust <- cutree(hclust(1 - output.C$corr), 7)
+for(i in 1:cluster.size){
+  clust <- cutree(hclust(1 - output.C$corr), cluster.size)
   sub.data <- melt(num.data[clust == i, ])
   sub.data$time <- rep(c(0, 0.5, 3, 6, 12), each = sum(clust == i))
   sub.data$gene <- rep(1:sum(clust == i), 5)
