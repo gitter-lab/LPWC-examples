@@ -2,7 +2,7 @@
 library(LPWC)
 library(ggplot2)
 library(fpc)
-library(cluster)
+library(reshape2)
 
 # setting the seed
 set.seed(12229)
@@ -53,7 +53,7 @@ plot(3:20, sil.width, type = "l")
 ## the cluster are plotted and saved
 for(i in 1:7){
   clust <- cutree(hclust(1 - output.C$corr), 7)
-  sub.data <- reshape2::melt(num.data[clust == i, ])
+  sub.data <- melt(num.data[clust == i, ])
   sub.data$time <- rep(c(0, 0.5, 3, 6, 12), each = sum(clust == i))
   sub.data$gene <- rep(1:sum(clust == i), 5)
   
