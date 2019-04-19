@@ -30,19 +30,20 @@ num.data <- num.data[sample(1:dim(num.data)[1], 100), ]
 ## analyzing time series data of 100 genes using LPWC with high penalty
 ## the timepoints in hours are taken from the header row of
 ## http://www.cs.cmu.edu/~jernst/st/g27_1.txt
-## *** TODO: isn't the first time point 0 h ***
-output.high <- corr.bestlag(data = num.data, timepoints = c(0.1, 0.5, 3, 6, 12))
+## *** TODO: explain why the first time point isn't 0 even though it should be
+## and link to the LPWC issue describing the bug ***
+output.high <- corr.bestlag(data = num.data, timepoints = c(0.0001, 0.5, 3, 6, 12))
 
 ## analyzing time series data of 100 genes using LPWC with low penalty,
 ## the low penalty allows more lags
 # *** TODO: can we demonstrate how it allows more lags by showing the number of nonzero lags? ***
-output.low <- corr.bestlag(data = num.data, timepoints = c(0.1, 0.5, 3, 6, 12), 
+output.low <- corr.bestlag(data = num.data, timepoints = c(0.0001, 0.5, 3, 6, 12), 
                            penalty = "low")
 
 ## if you want to customize the penalty instead of using the high or low
 ## default values, you can control the C parameter in the penalty funtion
 ## we picked C = 1/100 in the example below
-output.C <- corr.bestlag(data = num.data, timepoints = c(0.1, 0.5, 3, 6, 12), 
+output.C <- corr.bestlag(data = num.data, timepoints = c(0.0001, 0.5, 3, 6, 12), 
                          C = 1/100)
 
 ## we use the silhouette method to determine the number of clusters with a minimum of 3
@@ -77,4 +78,5 @@ for(i in 1:cluster.size){
   ggsave(temp_plot, file=paste0("plot_", i,".png"), width = 14, height = 10, units = "cm")
 }
 
-## ** TODO: output the session state such as the package versions uses **
+## inspect the R environment
+sessionInfo()

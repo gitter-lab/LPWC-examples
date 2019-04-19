@@ -22,7 +22,7 @@ set.seed(29876)
 high_results <- LPWC::corr.bestlag(simdata, timepoints = timepoints, max.lag = 2, penalty = "high", iter = 10)
 
 # compute distance with the high penalty
-# ** TODO: why call bestlag again if the restuls are already there? **
+# ** TODO: change the comment and variables to low **
 dist_high <- 1 - LPWC::corr.bestlag(simdata, timepoints = timepoints, max.lag = 2, penalty = "low", iter = 10)$corr
 
 # plot a hierarchical clustering using the high penalty LPWC distances
@@ -34,4 +34,5 @@ dist_low <- 1 - LPWC::corr.bestlag(simdata, timepoints = timepoints, max.lag = 2
 # divide the hierarchical clustering into 3 groups
 cutree(hclust(dist_low), k = 3)
 
-# ** TODO: output the session state such as the package versions uses **
+# inspect the R environment
+sessionInfo()
