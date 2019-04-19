@@ -10,5 +10,6 @@ The `example.R` file provides example code for analyzing time series data using 
 It also shows one way to select the number of clusters using the silhouette method and how to plot the clusters using ggplot2.
 
 ## Troubleshooting
+It is normal for Binder to take several minutes to load the executable software environment.
 If you see the error message `Failed to connect to event stream` when launching Binder, simply refresh your web browser.
 The connection will typically be re-established and launch Binder successfully.
