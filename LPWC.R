@@ -22,8 +22,7 @@ set.seed(29876)
 high_results <- LPWC::corr.bestlag(simdata, timepoints = timepoints, max.lag = 2, penalty = "high", iter = 10)
 
 # compute distance with the high penalty
-# ** TODO: change the comment and variables to low **
-dist_high <- 1 - LPWC::corr.bestlag(simdata, timepoints = timepoints, max.lag = 2, penalty = "low", iter = 10)$corr
+dist_high <- 1 - high_results$corr
 
 # plot a hierarchical clustering using the high penalty LPWC distances
 plot(hclust(dist_high))
