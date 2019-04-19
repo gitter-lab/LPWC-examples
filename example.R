@@ -76,3 +76,5 @@ for(i in 1:cluster.size){
   ## saving each cluster plot
   ggsave(temp_plot, file=paste0("plot_", i,".png"), width = 14, height = 10, units = "cm")
 }
+
+## ** TODO: output the session state such as the package versions uses **
