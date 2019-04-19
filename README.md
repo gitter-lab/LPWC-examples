@@ -4,7 +4,7 @@
 # LPWC examples
 Examples for running the [LPWC](https://github.com/gitter-lab/LPWC/) R package for time series clustering that are executable within [Binder](https://mybinder.org/).
 
-## Scripts
+## Usage
 ** TODO: How does the user run these? 
 We need some instructions for what they should do after landing in R studio.
 We also need to give some indication of how long some of these steps take.

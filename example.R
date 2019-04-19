@@ -60,6 +60,7 @@ for(i in 3:20){
 plot(3:20, sil.width, type = "l")
 
 ## based on the plot, 7 was picked as the ideal cluster size 
+## *** TODO: why 7, 19 has better sil.width ***
 cluster.size <- 7
 
 ## plotting and saving the clusters
