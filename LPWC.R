@@ -24,7 +24,7 @@ set.seed(29876)
 # store results for high penalty simulation
 high_results <- LPWC::corr.bestlag(simdata, timepoints = timepoints, max.lag = 2, penalty = "high", iter = 10)
 
-# compute distance for high penalty
+# compute the correlation for high penalty
 dist_high <- 1 - LPWC::corr.bestlag(simdata, timepoints = timepoints, max.lag = 2, penalty = "low", iter = 10)$corr
 
 # plot hierarchical clustering
