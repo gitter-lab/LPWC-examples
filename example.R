@@ -16,16 +16,21 @@ set.seed(12229)
 data <- read.delim("http://www.cs.cmu.edu/~jernst/st/g27_1.txt", header = T)
 
 ## selecting columns with time series data
-# *** TODO: use the gene names ***
-num.data <- data[, c(3:7)]
+num.data <- data[, c(2, 3:7)]
 
 ## removing genes with missing expression values
 num.data <- num.data[complete.cases(num.data), ]
+## removing gene with no gene symbol
+num.data <- num.data[num.data$Gene.Symbol != "",]
 
 ## subset the data by randomly selecting 100 genes
 ## ignore this line when analyzing your data, we subset the data to 
 ## speed up the computation in this example
 num.data <- num.data[sample(1:dim(num.data)[1], 100), ]
+
+# assign names to the dataset and remove gene symbol to the dataset column
+rownames(num.data) <- num.data$Gene.Symbol
+num.data <- num.data[, -1]
 
 ## analyzing time series data of 100 genes using LPWC with high penalty
 ## the timepoints in hours are taken from the header row of
@@ -36,9 +41,13 @@ output.high <- corr.bestlag(data = num.data, timepoints = c(0.0001, 0.5, 3, 6, 1
 
 ## analyzing time series data of 100 genes using LPWC with low penalty,
 ## the low penalty allows more lags
-# *** TODO: can we demonstrate how it allows more lags by showing the number of nonzero lags? ***
 output.low <- corr.bestlag(data = num.data, timepoints = c(0.0001, 0.5, 3, 6, 12), 
                            penalty = "low")
+
+## demonstrating more lags with low penalty
+## comparing the lags output for low and high 
+table(output.high$lags)
+table(output.low$lags)
 
 ## if you want to customize the penalty instead of using the high or low
 ## default values, you can control the C parameter in the penalty funtion
@@ -50,8 +59,6 @@ output.C <- corr.bestlag(data = num.data, timepoints = c(0.0001, 0.5, 3, 6, 12),
 ## clusters and maximum of 20 clusters
 sil.width <- rep(NA, length(3:20))
 for(i in 3:20){
-## *** TODO: why do you reset the seed each time ***
-  set.seed(123456)
   clust <- cutree(hclust(1 - output.C$corr), i)
   sil.width[i - 2] <- cluster.stats(1 - output.C$corr,  clust)$avg.silwidth
 }
@@ -60,7 +67,8 @@ for(i in 3:20){
 plot(3:20, sil.width, type = "l")
 
 ## based on the plot, 7 was picked as the ideal cluster size 
-## *** TODO: why 7, 19 has better sil.width ***
+## Both 7 and 19 are good number of cluster size to pick because they have
+## a pretty high average silhouette width. 
 cluster.size <- 7
 
 ## plotting and saving the clusters
