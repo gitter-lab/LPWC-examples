@@ -69,6 +69,8 @@ plot(3:20, sil.width, type = "l")
 ## based on the plot, 7 was picked as the ideal cluster size 
 ## Both 7 and 19 are good number of cluster size to pick because they have
 ## a pretty high average silhouette width. 
+## The average silhouette width describes the tightness between the items 
+## in each cluster. 
 cluster.size <- 7
 
 ## plotting and saving the clusters
