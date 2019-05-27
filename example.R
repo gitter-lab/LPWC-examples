@@ -28,7 +28,7 @@ num.data <- num.data[num.data$Gene.Symbol != "",]
 ## speed up the computation in this example
 num.data <- num.data[sample(1:dim(num.data)[1], 100), ]
 
-# assign names to the dataset and remove gene symbol to the dataset column
+# assign names to the dataset and remove the gene symbol to the dataset column
 rownames(num.data) <- num.data$Gene.Symbol
 num.data <- num.data[, -1]
 
@@ -56,22 +56,22 @@ output.C <- corr.bestlag(data = num.data, timepoints = c(0.0001, 0.5, 3, 6, 12),
                          C = 1/100)
 
 ## we use the silhouette method to determine the number of clusters with a minimum of 3
-## clusters and maximum of 20 clusters
-sil.width <- rep(NA, length(3:20))
-for(i in 3:20){
+## clusters and maximum of 10 clusters
+sil.width <- rep(NA, length(3:10))
+for(i in 3:10){
   clust <- cutree(hclust(1 - output.C$corr), i)
   sil.width[i - 2] <- cluster.stats(1 - output.C$corr,  clust)$avg.silwidth
 }
 
 ## picking the best number of clusters based on average silhouette width
-plot(3:20, sil.width, type = "l")
+plot(3:10, sil.width, type = "l")
 
-## based on the plot, 7 was picked as the ideal cluster size 
-## Both 7 and 19 are good number of cluster size to pick because they have
+## based on the plot, 8 was picked as the ideal cluster size 
+## Both 5 and 8 are good number of cluster size to pick because they have
 ## a pretty high average silhouette width. 
 ## The average silhouette width describes the tightness between the items 
 ## in each cluster. 
-cluster.size <- 7
+cluster.size <- 8
 
 ## plotting and saving the clusters
 for(i in 1:cluster.size){
