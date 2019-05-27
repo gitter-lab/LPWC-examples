@@ -46,6 +46,10 @@ output.low <- corr.bestlag(data = num.data, timepoints = c(0.0001, 0.5, 3, 6, 12
 
 ## demonstrating more lags with low penalty
 ## comparing the lags output for low and high 
+## tony:do you prefer this?
+output.high$lags
+output.low$lags
+#instead of the table like this?
 table(output.high$lags)
 table(output.low$lags)
 
@@ -91,3 +95,4 @@ for(i in 1:cluster.size){
 
 ## inspect the R environment
 sessionInfo()
+
