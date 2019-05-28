@@ -35,8 +35,8 @@ num.data <- num.data[, -1]
 ## analyzing time series data of 100 genes using LPWC with high penalty
 ## the timepoints in hours are taken from the header row of
 ## http://www.cs.cmu.edu/~jernst/st/g27_1.txt
-## *** TODO: explain why the first time point isn't 0 even though it should be
-## and link to the LPWC issue describing the bug ***
+## why isn't the first timepoint 0?
+## please look at this issue: https://github.com/gitter-lab/LPWC/issues/57
 output.high <- corr.bestlag(data = num.data, timepoints = c(0.0001, 0.5, 3, 6, 12))
 
 ## analyzing time series data of 100 genes using LPWC with low penalty,
