@@ -15,7 +15,8 @@ str(simdata)
 timepoints <- c(0, 2, 4, 6, 8, 18, 24, 32, 48, 72)
 
 
-# interpolate if timepoints larger than 10 mins
+# interpolate if the difference between consecutive timepoints are greater than 10 
+# when interpolating, we keep add 10 the timepoints until the difference between consecutive timepoints are less than or equal to 10 
 new_timepoints <- c(timepoints[1])
 k <- 10
 for(i in 2:length(timepoints)){
