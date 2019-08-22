@@ -1,3 +1,5 @@
+# loading the LPWC library, which has the simulated data
+library(LPWC)
 # loading the ggplot2 library
 library(ggplot2)
 
