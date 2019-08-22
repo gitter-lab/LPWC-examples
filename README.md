@@ -10,6 +10,7 @@ The `LPWC.R` file executes all the code available in the LPWC vignette.
 The `example.R` file provides example code for analyzing time series data using LPWC.
 It also shows one way to select the number of clusters using the silhouette method and how to plot the clusters using ggplot2.
 The `example.R` is easy to run and instructions are included with each line of code.
+The `interpolate.R` file provides an implementation for interpolating between large gaps of timepoints. 
 After clicking one of the `.R` files, the file should open up in the top left corner of the R studio.
 For macOS, click `Command + Enter` to run the particular line and step through the example.
 Similarly, Windows users can use `ctrl + Enter` to run each line.
