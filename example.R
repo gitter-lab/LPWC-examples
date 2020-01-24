@@ -56,7 +56,7 @@ table(output.low$lags)
 ## If you want to customize the penalty instead of using the high or low
 ## default values, you can control the C parameter in the penalty funtion.
 ## We picked C = 1/100 in the example below.
-output.C <- corr.bestlag(data = num.data, timepoints = c(0.0001, 0.5, 3, 6, 12), 
+output.C <- corr.bestlag(data = num.data, timepoints = c(0, 0.5, 3, 6, 12), 
                          C = 1/100)
 
 ## We use the silhouette method to determine the number of clusters with a minimum of 3
